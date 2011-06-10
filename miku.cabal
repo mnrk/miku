@@ -33,6 +33,5 @@ library
                       Network.Miku.Config
                       Network.Miku.DSL
                       Network.Miku.Engine
-                      Network.Miku.Middleware.MikuRouter
                       Network.Miku.Type
                       Network.Miku.Utils

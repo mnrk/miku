@@ -10,7 +10,6 @@ import Hack2.Contrib.Utils (show_bytestring)
 import Network.Miku
 import Network.Miku.Engine
 import Network.Miku.Utils
-import Network.Miku.Middleware.MikuRouter
 import Data.Maybe
 import Air.Env hiding ((.))
 import Prelude ((.))
@@ -39,9 +38,6 @@ main = do
     get "/bench" - do
       name <- ask ^ params ^ lookup "name" ^ fromMaybe "nobody"
       html ("<h1>" + name + "</h1>")
-
-    -- on the fly router switcher
-    router miku_router
 
     -- simple
     get "/hello"    (text "hello world")

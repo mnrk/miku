@@ -23,8 +23,8 @@ import Air.Data.Record.SimpleLabel hiding (get)
 app :: Application -> AppMonad
 app f = ask >>= (f > io) >>= State.put
 
-router :: Router -> MikuMonad
-router = setM __current_router
+middleware :: Middleware -> MikuMonad
+middleware x = modM __middlewares - insert_last x
 
 get, put, post, delete :: ByteString -> AppMonad -> MikuMonad
 get    = add_route GET
@@ -33,9 +33,10 @@ post   = add_route POST
 delete = add_route DELETE
 
 
-middleware :: Middleware -> MikuMonad
-middleware x = modM __middlewares - insert_last x
-
+add_route :: RequestMethod -> ByteString -> AppMonad -> MikuMonad
+add_route route_method route_string app_monad = do
+  middleware - miku_router route_method route_string app_monad
+      
 before :: (Env -> IO Env) -> MikuMonad
 before = ioconfig > middleware
 
