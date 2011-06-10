@@ -1,0 +1,45 @@
+{-# LANGUAGE OverloadedStrings #-}
+
+module Network.Miku.Utils where
+
+import Control.Monad.State
+import Hack2
+import Air.Env
+import Prelude ()
+import Data.ByteString.UTF8 (fromString, toString)
+
+import qualified Data.ByteString.Lazy.Char8 as B
+import Data.ByteString.Lazy.Char8 (ByteString)
+
+namespace :: ByteString -> Env -> [(ByteString, ByteString)]
+namespace x env =
+  env
+    .hackHeaders
+    .select (fst > (x `B.isPrefixOf`))
+    .map_fst (B.drop (x.B.length))
+
+put_namespace :: ByteString -> [(ByteString, ByteString)] -> Env -> Env
+put_namespace x xs env = 
+  let adds             = xs.map_fst (x +)
+      new_headers      = adds.map fst
+      new_hack_headers = 
+        env.hackHeaders.reject (fst > belongs_to new_headers) ++ adds
+  in
+  env {hackHeaders = new_hack_headers}
+
+
+set_namespace :: ByteString -> ByteString -> ByteString -> Env -> Env
+set_namespace x k v = put_namespace x [(k,v)]
+
+delete_namespace :: ByteString -> ByteString -> Env -> Env
+delete_namespace x k env = 
+  let new_hack_headers = env.hackHeaders.reject (fst > is (x + k))
+  in
+  env {hackHeaders = new_hack_headers}
+
+insert_last :: a -> [a] -> [a]
+insert_last x xs = xs ++ [x]
+
+update :: (MonadState a m, Functor m) => (a -> a) -> m ()
+update f = get ^ f >>= put
+

@@ -1,0 +1,13 @@
+*.swp
+*.swo
+*.o
+*.hi
+
+/db
+
+/_darcs
+/dist
+
+
+.nemesis
+
