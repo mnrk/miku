@@ -9,13 +9,14 @@ import Hack2
 import Hack2.Contrib.Middleware.UserMime
 import Hack2.Contrib.Middleware.NotFound
 import Hack2.Contrib.Utils hiding (get, put)
-import Air.Env
+import Air.Env hiding (mod)
 import Network.Miku.Config
 import Network.Miku.Middleware.MikuRouter ()
 import Network.Miku.Type
 import Network.Miku.Utils
 import Prelude ()
 import Data.ByteString.Lazy.Char8 (ByteString)
+import Air.Data.Record.SimpleLabel hiding (get)
 
 run_app :: AppMonad -> Application
 run_app unit = \env -> runReaderT unit env .flip execStateT def {status = 200}
@@ -37,22 +38,8 @@ miku unit = run unit not_found_app
       in
       use [pre, mime_filter, stack, route]
 
-add_router_config :: RouterConfig -> MikuState -> MikuState
-add_router_config r s = let xs = s.routes in s {routes = xs.insert_last r}
 
 add_route :: RequestMethod -> ByteString -> AppMonad -> MikuMonad
 add_route r s u = do
   c <- get ^ current_router
-  update - add_router_config RouterConfig { route_path = (r, s, u), router = c }
-
-set_router :: Router -> MikuState -> MikuState
-set_router r x = x { current_router = r }
-
-add_middleware :: Middleware -> MikuState -> MikuState
-add_middleware x s = 
-  let xs = s.middlewares in s {middlewares = xs.insert_last x}
-
-add_mime :: ByteString -> ByteString -> MikuState -> MikuState
-add_mime k v s = let xs = s.mimes in s {mimes = xs.insert_last (k, v)}
-
-
+  modM __routes - insert_last RouterConfig { route_path = (r, s, u), router = c }

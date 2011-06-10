@@ -1,3 +1,5 @@
+{-# LANGUAGE TemplateHaskell #-}
+
 module Network.Miku.Type where
 
 import Control.Monad.Reader
@@ -7,6 +9,8 @@ import Hack2
 import Hack2.Contrib.Utils
 import Network.Miku.Middleware.MikuRouter
 import Data.ByteString.Lazy.Char8 (ByteString)
+
+import Air.TH
 
 type RoutePathT a = (RequestMethod, ByteString, a)
 type RoutePath    = RoutePathT AppMonad
@@ -42,6 +46,7 @@ instance Default MikuState where
     , mimes = def
     }
 
+mkLabel ''MikuState
 
 type MikuMonadT a = State MikuState a
 type MikuMonad    = MikuMonadT ()

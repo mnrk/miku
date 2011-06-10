@@ -18,12 +18,13 @@ import Prelude hiding ((.), (>), (^), (-))
 import qualified Control.Monad.State as State
 import Data.ByteString.Lazy.Char8 (ByteString)
 
+import Air.Data.Record.SimpleLabel hiding (get)
+
 app :: Application -> AppMonad
 app f = ask >>= (f > io) >>= State.put
 
-
 router :: Router -> MikuMonad
-router = set_router > update
+router = setM __current_router
 
 get, put, post, delete :: ByteString -> AppMonad -> MikuMonad
 get    = add_route GET
@@ -33,7 +34,7 @@ delete = add_route DELETE
 
 
 middleware :: Middleware -> MikuMonad
-middleware = add_middleware > update
+middleware x = modM __middlewares - insert_last x
 
 before :: (Env -> IO Env) -> MikuMonad
 before = ioconfig > middleware
@@ -42,7 +43,7 @@ after :: (Response -> IO Response) -> MikuMonad
 after = censor > middleware
 
 mime :: ByteString -> ByteString -> MikuMonad
-mime k v = add_mime k v .update
+mime k v = modM __mimes - insert_last (k,v)
 
 public :: Maybe ByteString -> [ByteString] -> MikuMonad
 public r xs = middleware - static r xs
