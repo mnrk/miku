@@ -24,13 +24,13 @@ miku :: MikuMonad -> Application
 miku unit = run unit not_found_app
   where
     not_found_app = not_found dummy_app
-    run_route router_config = (router_config.router) miku_captures run_app (router_config.route_path)
+    run_router  router_config = (router_config.router) miku_captures run_app (router_config.route_path)
     
     run :: MikuMonad -> Middleware
     run unit' = 
       let miku_state    = execState unit' def
           router_configs = miku_state.routes
-          route         = router_configs.map run_route .use
+          route         = router_configs.map run_router  .use
           mime_filter   = user_mime (miku_state.mimes)
           stack         = miku_state.middlewares.use
           pre           = pre_installed_middlewares.use
