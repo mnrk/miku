@@ -17,8 +17,16 @@ homepage:             http://github.com/nfjinjing/miku
 data-files:           readme.md, changelog.md, Nemesis, known-issues.md
 
 library
-  ghc-options: -Wall
-  build-depends: base > 4 && <= 5, data-default, hack2 >= 2009.7.15, hack2-contrib >= 2009.8.18, utf8-string, air >= 2011.6.11, mtl, containers, bytestring
+  build-depends:      base > 4 && <= 5
+                    , data-default
+                    , hack2 >= 2011.6.10
+                    , hack2-contrib >= 2011.6.10
+                    , utf8-string
+                    , air >= 2011.6.11
+                    , mtl
+                    , containers
+                    , bytestring
+                    
   hs-source-dirs: src/
   exposed-modules:  
                       Network.Miku
