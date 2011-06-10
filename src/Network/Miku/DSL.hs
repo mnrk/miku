@@ -22,29 +22,29 @@ app :: Application -> AppMonad
 app f = ask >>= (f > io) >>= State.put
 
 
-router :: Router -> Unit
+router :: Router -> MikuMonad
 router = set_router > update
 
-get, put, post, delete :: ByteString -> AppMonad -> Unit
+get, put, post, delete :: ByteString -> AppMonad -> MikuMonad
 get    = add_route GET
 put    = add_route PUT
 post   = add_route POST
 delete = add_route DELETE
 
 
-middleware :: Middleware -> Unit
+middleware :: Middleware -> MikuMonad
 middleware = add_middleware > update
 
-before :: (Env -> IO Env) -> Unit
+before :: (Env -> IO Env) -> MikuMonad
 before = ioconfig > middleware
 
-after :: (Response -> IO Response) -> Unit
+after :: (Response -> IO Response) -> MikuMonad
 after = censor > middleware
 
-mime :: ByteString -> ByteString -> Unit
+mime :: ByteString -> ByteString -> MikuMonad
 mime k v = add_mime k v .update
 
-public :: Maybe ByteString -> [ByteString] -> Unit
+public :: Maybe ByteString -> [ByteString] -> MikuMonad
 public r xs = middleware - static r xs
 
 io :: (MonadIO m) => IO a -> m a

@@ -20,13 +20,13 @@ import Data.ByteString.Lazy.Char8 (ByteString)
 run_app :: AppMonad -> Application
 run_app unit = \env -> runReaderT unit env .flip execStateT def {status = 200}
 
-miku :: Unit -> Application
+miku :: MikuMonad -> Application
 miku unit = run unit not_found_app
   where
     not_found_app = not_found dummy_app
     run_route route_config = (route_config.router) miku_captures run_app (route_config.route_path)
     
-    run :: Unit -> Middleware
+    run :: MikuMonad -> Middleware
     run unit' = 
       let miku_state    = execState unit' def
           route_configs = miku_state.routes
@@ -40,7 +40,7 @@ miku unit = run unit not_found_app
 add_route_config :: RouteConfig -> Miku -> Miku
 add_route_config r s = let xs = s.routes in s {routes = xs.insert_last r}
 
-add_route :: RequestMethod -> ByteString -> AppMonad -> Unit
+add_route :: RequestMethod -> ByteString -> AppMonad -> MikuMonad
 add_route r s u = do
   c <- get ^ current_router
   update - add_route_config RouteConfig { route_path = (r, s, u), router = c }

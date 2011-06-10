@@ -97,7 +97,7 @@ check: <http://localhost:3000>
 
     -- in Network.Miku.Engine
     
-    miku :: Unit -> Application
+    miku :: MikuMonad -> Application
 
 
 ## Hints

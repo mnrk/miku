@@ -43,5 +43,5 @@ instance Default Miku where
     }
 
 
-type UnitT a = State Miku a
-type Unit    = UnitT ()
+type MikuMonadT a = State Miku a
+type MikuMonad    = MikuMonadT ()
