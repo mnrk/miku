@@ -12,8 +12,8 @@ type RoutePathT a = (RequestMethod, ByteString, a)
 type RoutePath    = RoutePathT AppMonad
 type AppReader    = Env
 type AppState     = Response
-type AppMonadT     = ReaderT AppReader (StateT AppState IO)
-type AppMonad      = AppMonadT ()
+type AppMonadT    = ReaderT AppReader (StateT AppState IO)
+type AppMonad     = AppMonadT ()
 
 type RouterT a = ByteString -> (a -> Application) -> RoutePathT a -> Middleware
 type Router    = RouterT AppMonad
