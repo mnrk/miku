@@ -18,14 +18,14 @@ import Prelude hiding ((.), (>), (^), (-))
 import qualified Control.Monad.State as State
 import Data.ByteString.Lazy.Char8 (ByteString)
 
-app :: Application -> AppUnit
+app :: Application -> AppMonad
 app f = ask >>= (f > io) >>= State.put
 
 
 router :: Router -> Unit
 router = set_router > update
 
-get, put, post, delete :: ByteString -> AppUnit -> Unit
+get, put, post, delete :: ByteString -> AppMonad -> Unit
 get    = add_route GET
 put    = add_route PUT
 post   = add_route POST
@@ -50,16 +50,16 @@ public r xs = middleware - static r xs
 io :: (MonadIO m) => IO a -> m a
 io = liftIO
 
-text :: ByteString -> AppUnit
+text :: ByteString -> AppMonad
 text x = do
   update - set_content_type _TextPlain
   update - set_body x
 
-html :: ByteString -> AppUnit
+html :: ByteString -> AppMonad
 html x = do
   update - set_content_type _TextHtml
   update - set_body x
 
 
-captures :: AppUnitT [(ByteString, ByteString)]
+captures :: AppMonadT [(ByteString, ByteString)]
 captures = ask ^ namespace miku_captures

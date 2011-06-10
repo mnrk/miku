@@ -17,7 +17,7 @@ import Network.Miku.Utils
 import Prelude ()
 import Data.ByteString.Lazy.Char8 (ByteString)
 
-run_app :: AppUnit -> Application
+run_app :: AppMonad -> Application
 run_app unit = \env -> runReaderT unit env .flip execStateT def {status = 200}
 
 miku :: Unit -> Application
@@ -40,7 +40,7 @@ miku unit = run unit not_found_app
 add_route_config :: RouteConfig -> Miku -> Miku
 add_route_config r s = let xs = s.routes in s {routes = xs.insert_last r}
 
-add_route :: RequestMethod -> ByteString -> AppUnit -> Unit
+add_route :: RequestMethod -> ByteString -> AppMonad -> Unit
 add_route r s u = do
   c <- get ^ current_router
   update - add_route_config RouteConfig { route_path = (r, s, u), router = c }
