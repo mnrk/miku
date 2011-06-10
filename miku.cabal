@@ -20,7 +20,7 @@ library
   build-depends:      base > 4 && <= 5
                     , data-default
                     , hack2 >= 2011.6.10
-                    , hack2-contrib >= 2011.6.10
+                    , hack2-contrib >= 2011.6.11
                     , utf8-string
                     , air >= 2011.6.11
                     , mtl

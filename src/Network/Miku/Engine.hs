@@ -48,7 +48,7 @@ miku_router route_method route_string app_monad app = \env ->
       case env.path_info.parse_params route_string of
         Nothing -> app env
         Just (_, params) -> 
-          let miku_app = run_app - local (put_namespace miku_captures params) app_monad 
+          let miku_app = run_app_monad - local (put_namespace miku_captures params) app_monad 
           in
           miku_app env
     

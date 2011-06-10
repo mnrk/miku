@@ -27,7 +27,7 @@ data MikuState = MikuState
 instance Default MikuState where
   def = MikuState 
     {
-      middlewares = [dummy_middleware]
+      middlewares = def
     , mimes = def
     }
 
