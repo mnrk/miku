@@ -26,9 +26,7 @@ import Data.Maybe
 
 
 miku :: MikuMonad -> Application
-miku miku_monad = miku_middleware miku_monad not_found_app
-  where
-    not_found_app = not_found dummy_app
+miku miku_monad = miku_middleware miku_monad (not_found dummy_app)
 
     
 miku_middleware :: MikuMonad -> Middleware
@@ -60,8 +58,8 @@ miku_router route_method route_string app_monad app = \env ->
   
   where
     
-    run_app :: AppMonad -> Application
-    run_app app_monad = \env -> runReaderT app_monad env .flip execStateT def {status = 200}
+    run_app_monad :: AppMonad -> Application
+    run_app_monad app_monad = \env -> runReaderT app_monad env .flip execStateT def {status = 200}
     
 
 parse_params :: ByteString -> ByteString -> Maybe (ByteString, [(ByteString, ByteString)])
