@@ -16,14 +16,6 @@ type AppState     = Response
 type AppMonadT    = ReaderT AppReader (StateT AppState IO)
 type AppMonad     = AppMonadT ()
 
-data RouterConfig = RouterConfig
-  {
-    route_method    :: RequestMethod
-  , route_string    :: ByteString
-  , route_app_monad :: AppMonad
-  }
-
-mkLabel ''RouterConfig
 
 data MikuState = MikuState
   {
