@@ -34,8 +34,8 @@ miku_middleware miku_monad =
   
   let miku_state                  = execState miku_monad def
       mime_filter                 = user_mime (miku_state.mimes)
-      miku_middlewares            = miku_state.middlewares.use
-      pre_installed_middleware    = pre_installed_middlewares.use
+      miku_middlewares            = use - miku_state.middlewares
+      pre_installed_middleware    = use - pre_installed_middlewares
   in
   
   use [pre_installed_middleware, mime_filter, miku_middlewares]
