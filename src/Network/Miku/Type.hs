@@ -18,23 +18,23 @@ type AppMonad     = AppMonadT ()
 type RouterT a = ByteString -> (a -> Application) -> RoutePathT a -> Middleware
 type Router    = RouterT AppMonad
 
-data RouteConfig = RouteConfig
+data RouterConfig = RouterConfig
   {
     route_path :: RoutePath
   , router     :: Router
   }
 
-data Miku = Miku
+data MikuState = MikuState
   {
     current_router  :: Router
-  , routes          :: [RouteConfig]
+  , routes          :: [RouterConfig]
   , middlewares     :: [Middleware]
   , mimes           :: [(ByteString, ByteString)]
   }
 
 
-instance Default Miku where
-  def = Miku 
+instance Default MikuState where
+  def = MikuState 
     {
       current_router = miku_router
     , routes = def
@@ -43,5 +43,5 @@ instance Default Miku where
     }
 
 
-type MikuMonadT a = State Miku a
+type MikuMonadT a = State MikuState a
 type MikuMonad    = MikuMonadT ()

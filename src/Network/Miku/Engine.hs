@@ -24,35 +24,35 @@ miku :: MikuMonad -> Application
 miku unit = run unit not_found_app
   where
     not_found_app = not_found dummy_app
-    run_route route_config = (route_config.router) miku_captures run_app (route_config.route_path)
+    run_route router_config = (router_config.router) miku_captures run_app (router_config.route_path)
     
     run :: MikuMonad -> Middleware
     run unit' = 
       let miku_state    = execState unit' def
-          route_configs = miku_state.routes
-          route         = route_configs.map run_route .use
+          router_configs = miku_state.routes
+          route         = router_configs.map run_route .use
           mime_filter   = user_mime (miku_state.mimes)
           stack         = miku_state.middlewares.use
           pre           = pre_installed_middlewares.use
       in
       use [pre, mime_filter, stack, route]
 
-add_route_config :: RouteConfig -> Miku -> Miku
-add_route_config r s = let xs = s.routes in s {routes = xs.insert_last r}
+add_router_config :: RouterConfig -> MikuState -> MikuState
+add_router_config r s = let xs = s.routes in s {routes = xs.insert_last r}
 
 add_route :: RequestMethod -> ByteString -> AppMonad -> MikuMonad
 add_route r s u = do
   c <- get ^ current_router
-  update - add_route_config RouteConfig { route_path = (r, s, u), router = c }
+  update - add_router_config RouterConfig { route_path = (r, s, u), router = c }
 
-set_router :: Router -> Miku -> Miku
+set_router :: Router -> MikuState -> MikuState
 set_router r x = x { current_router = r }
 
-add_middleware :: Middleware -> Miku -> Miku
+add_middleware :: Middleware -> MikuState -> MikuState
 add_middleware x s = 
   let xs = s.middlewares in s {middlewares = xs.insert_last x}
 
-add_mime :: ByteString -> ByteString -> Miku -> Miku
+add_mime :: ByteString -> ByteString -> MikuState -> MikuState
 add_mime k v s = let xs = s.mimes in s {mimes = xs.insert_last (k, v)}
 
 
