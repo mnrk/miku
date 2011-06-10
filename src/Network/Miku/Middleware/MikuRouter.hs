@@ -7,7 +7,6 @@ import Hack2
 import Hack2.Contrib.Utils
 import Hack2.Contrib.Utils hiding (get, put)
 import Air.Env
-import Air.Extra
 import Prelude ()
 import Data.ByteString.UTF8 (fromString)
 import qualified Prelude as P
