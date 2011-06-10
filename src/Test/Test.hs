@@ -23,7 +23,10 @@ import qualified Data.ByteString.Lazy.Char8 as B
 -- default on port 3000
 
 main :: IO ()
-main = run . miku - do
+main = do
+  putStrLn "server started on port 3000..."
+  
+  run . miku - do
   
     
     before return

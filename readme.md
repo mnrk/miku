@@ -1,6 +1,6 @@
 # miku
 
-A minimum web dev DSL
+A tiny web dev DSL
 
 ## Example
 

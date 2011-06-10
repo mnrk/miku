@@ -23,10 +23,12 @@ nemesis = do
   task "stat" - do
     sh "cloc -match-f=hs- --quiet src --no3"
 
-  
-  ghci "i" "Test/Test"
-  
 
-
-  where
-    ghci n x = task n - sh - "ghci -isrc src/" ++ x ++ ".hs"
+  task "i" - do
+    sh "ghci -isrc src/Test/Test.hs"
+  
+  task "run" - do
+    sh "runghc -isrc src/Test/Test.hs"
+    
+  task "myapp" - do
+    sh "runghc -isrc src/Test/myapp.hs"
