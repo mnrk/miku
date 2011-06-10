@@ -28,18 +28,10 @@ put_namespace x xs env =
   env {hackHeaders = new_hack_headers}
 
 
-set_namespace :: ByteString -> ByteString -> ByteString -> Env -> Env
-set_namespace x k v = put_namespace x [(k,v)]
-
-delete_namespace :: ByteString -> ByteString -> Env -> Env
-delete_namespace x k env = 
-  let new_hack_headers = env.hackHeaders.reject (fst > is (x + k))
-  in
-  env {hackHeaders = new_hack_headers}
 
 insert_last :: a -> [a] -> [a]
 insert_last x xs = xs ++ [x]
 
 update :: (MonadState a m, Functor m) => (a -> a) -> m ()
-update f = get ^ f >>= put
+update = modify
 
