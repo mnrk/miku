@@ -22,10 +22,10 @@ miku_router prefix runner route_path app = \env ->
   if route_path.match_route env.not
     then app env
     else do
-      let (_, template, app_state) = route_path
-          (_, params) = parse_params template (env.path_info) .fromJust
+      let (_, route_string, app_state) = route_path
+          (_, params) = parse_params route_string (env.path_info) .fromJust
           
-      runner app_state (env .merge_captured params)
+      runner app_state (merge_captured params env)
   where
     match_route env' (method, template, _) = 
       env'.request_method.is method 

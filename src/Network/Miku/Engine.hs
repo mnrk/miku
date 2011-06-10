@@ -24,7 +24,7 @@ miku :: Unit -> Application
 miku unit = run unit not_found_app
   where
     not_found_app = not_found dummy_app
-    run_route x = (x.router) miku_captures run_app (x.route_path)
+    run_route route_config = (route_config.router) miku_captures run_app (route_config.route_path)
     
     run :: Unit -> Middleware
     run unit' = 
