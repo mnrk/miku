@@ -16,7 +16,7 @@ A tiny web dev DSL
 
     cabal update
     cabal install miku
-    cabal install hack2-handler-happstack
+    cabal install hack2-handler-happstack-server
     
     -- copy and paste the above example to myapp.hs
     
@@ -38,7 +38,7 @@ check: <http://localhost:3000>
     import Prelude hiding ((-))
     
     import Network.Miku
-    import Hack2.Handler.Happstack
+    import Hack2.Handler.HappstackServer
     
     main = run . miku - do
 
