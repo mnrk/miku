@@ -4,8 +4,10 @@ A tiny web dev DSL
 
 ## Example
 
+    {-# LANGUAGE OverloadedStrings #-}
+    
     import Network.Miku
-    import Hack2.Handler.Happstack
+    import Hack2.Handler.HappstackServer
     
     main = run . miku $ get "/" (text "miku power")
 
@@ -14,18 +16,17 @@ A tiny web dev DSL
 
     cabal update
     cabal install miku
-    cabal install hack-handler-happstack
+    cabal install hack2-handler-happstack
     
     -- copy and paste the above example to myapp.hs
     
-    ghc --make myapp.hs
-    ./myapp
+    runghc myapp.hs
 
 check: <http://localhost:3000>
 
 ## Quick reference
 
-<http://github.com/nfjinjing/miku/blob/master/src/Test/Test.hs>
+<https://github.com/nfjinjing/miku/blob/master/src/Test/Test.hs>
 
 
 ## Routes
@@ -88,13 +89,11 @@ check: <http://localhost:3000>
 
     -- note both etag and lambda middleware are removed ... for somce ghc 7.0 compatability ><
     
-    import Hack2.Contrib.Middleware.ETag
-    import Hack2.Contrib.Middleware.Lambda
+    import Hack2.Contrib.Middleware.SimpleAccessLogger
     
-    middleware etag
-    middleware lambda
+    middleware - simple_access_logger Nothing
 
-### Convert miku into a hack application
+### Convert miku into a hack2 application
 
     -- in Network.Miku.Engine
     
@@ -103,7 +102,7 @@ check: <http://localhost:3000>
 
 ## Hints
 
-* It's recommended to use your own html combinator / template engine, miku's template system is for completeness rather then usefulness... The author has removed the section on view from this readme. Examples can still be found in `src/Test/Test.hs`. Try DIY with, e.g. [moe](http://github.com/nfjinjing/moe). The template code will stay for, say, a few years, but will eventually fade away.
+* It's recommended to use your own html combinator / template engine. Try DIY with, e.g. [moe](http://github.com/nfjinjing/moe).
 * [Example view using custom html combinator (moe in this case)](http://github.com/nfjinjing/miku/blob/master/src/Test/Moe.hs)
 * When inspecting the request, use `ask` defined in `ReaderT` monad to get the `Hack2.Environment`, then use helper method defined in `Hack2.Contrib.Request` to query it.
 * `Response` is in `StateT`, `html` and `text` are simply helper methods that update the state, i.e. setting the response body, content-type, etc.

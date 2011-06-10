@@ -18,6 +18,8 @@ import Prelude ((.))
 import Hack2.Contrib.Request
 import qualified Data.ByteString.Lazy.Char8 as B
 
+import Hack2.Contrib.Middleware.SimpleAccessLogger
+
 
 
 -- default on port 3000
@@ -31,6 +33,8 @@ main = do
     
     before return
     after return
+
+    middleware - simple_access_logger Nothing
 
     get "/bench" - do
       name <- ask ^ params ^ lookup "name" ^ fromMaybe "nobody"

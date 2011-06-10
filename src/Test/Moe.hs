@@ -1,14 +1,18 @@
+{-# LANGUAGE OverloadedStrings #-}
+
+
 import qualified Network.Miku as Miku
 import Network.Miku (get, miku)
-import Hack2.Handler.Happstack
+import Hack2.Handler.HappstackServer
 import Text.HTML.Moe2
 
-import Prelude hiding ((/), (-), head, (>), (.), div)
+import Prelude hiding ((/), (-), head, (>), div)
 import Air.Env ((-))
 
+import Data.ByteString.Lazy.Char8 (ByteString, fromChunks)
 
-hello_page :: String
-hello_page = render -
+hello_page :: ByteString
+hello_page = render_bytestring -
   html - do
     head - do
       meta ! [http_equiv "Content-Type", content "text/html; charset-utf-8"] - (/)

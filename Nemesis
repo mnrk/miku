@@ -32,3 +32,9 @@ nemesis = do
     
   task "myapp" - do
     sh "runghc -isrc src/Test/myapp.hs"
+    
+  task "moe" - do
+    sh "runghc -isrc src/Test/Moe.hs"
+
+  task "moei" - do
+    sh "ghci -isrc src/Test/Moe.hs"
