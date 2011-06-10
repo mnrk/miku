@@ -59,8 +59,8 @@ check: <http://localhost:3000>
     get "/say/:user/:message" - do
       text . show =<< captures
 
-    -- /say/jinjing/hello will output
-    -- [("user","jinjing"),("message","hello")]
+    -- /say/miku/hello will output
+    -- [("user","miku"),("message","hello")]
 
 
 ## Static
@@ -87,8 +87,6 @@ check: <http://localhost:3000>
 
 ### Use hack2 middleware
 
-    -- note both etag and lambda middleware are removed ... for somce ghc 7.0 compatability ><
-    
     import Hack2.Contrib.Middleware.SimpleAccessLogger
     
     middleware - simple_access_logger Nothing
