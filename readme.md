@@ -85,7 +85,7 @@ check: <http://localhost:3000>
 
 ## Hack2 integration
 
-### Use hack middleware
+### Use hack2 middleware
 
     -- note both etag and lambda middleware are removed ... for somce ghc 7.0 compatability ><
     
