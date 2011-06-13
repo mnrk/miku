@@ -32,7 +32,9 @@ check: <http://localhost:3000>
 ## Routes
 
 ### Verbs
-
+    
+    {-# LANGUAGE OverloadedStrings #-}
+    
     -- use - instead of $ for clarity
     import Air.Light ((-))
     import Prelude hiding ((-))
