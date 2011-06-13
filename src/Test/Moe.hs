@@ -15,7 +15,7 @@ hello_page :: ByteString
 hello_page = render_bytestring -
   html - do
     head - do
-      meta ! [http_equiv "Content-Type", content "text/html; charset-utf-8"] - (/)
+      meta ! [http_equiv "Content-Type", content "text/html; charset=utf-8"] - (/)
       title - str "my title"
 
     body - do
