@@ -105,7 +105,6 @@ check: <http://localhost:3000>
 * When inspecting the request, use `ask` defined in `ReaderT` monad to get the `Hack2.Environment`, then use helper method defined in `Hack2.Contrib.Request` to query it.
 * `Response` is in `StateT`, `html` and `text` are simply helper methods that update the state, i.e. setting the response body, content-type, etc.
 * You do need to understand monad transformers to reach the full power of `miku`.
-* For mac users, use `GHC 6.12.1` if you have trouble running the server.
     
 ## Reference
 
