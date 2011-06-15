@@ -35,7 +35,7 @@ delete = add_route DELETE
 
 add_route :: RequestMethod -> ByteString -> AppMonad -> MikuMonad
 add_route route_method route_string app_monad = do
-  middleware - miku_router route_method route_string app_monad
+  modM __router - insert_last - miku_router route_method route_string app_monad
       
 before :: (Env -> IO Env) -> MikuMonad
 before = ioconfig > middleware

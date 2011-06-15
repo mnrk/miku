@@ -20,6 +20,7 @@ type AppMonad     = AppMonadT ()
 data MikuState = MikuState
   {
     middlewares     :: [Middleware]
+  , router          :: [Middleware]
   , mimes           :: [(ByteString, ByteString)]
   }
 
@@ -28,6 +29,7 @@ instance Default MikuState where
   def = MikuState 
     {
       middlewares = def
+    , router = def
     , mimes = def
     }
 

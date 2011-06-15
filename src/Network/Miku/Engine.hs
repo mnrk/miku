@@ -35,10 +35,11 @@ miku_middleware miku_monad =
   let miku_state                      = execState miku_monad def
       mime_filter                     = user_mime (miku_state.mimes)
       miku_middleware_stack           = use - miku_state.middlewares
+      miku_router_middleware          = use - miku_state.router
       pre_installed_middleware_stack  = use - pre_installed_middlewares
   in
   
-  use [pre_installed_middleware_stack, mime_filter, miku_middleware_stack]
+  use [pre_installed_middleware_stack, mime_filter, miku_middleware_stack, miku_router_middleware]
   
 
 miku_router :: RequestMethod -> ByteString -> AppMonad -> Middleware
