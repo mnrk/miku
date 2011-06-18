@@ -6,7 +6,6 @@ module Network.Miku.Engine where
 
 import Control.Monad.Reader hiding (join)
 import Control.Monad.State hiding (join)
-import Data.Default
 import Hack2
 import Hack2.Contrib.Middleware.UserMime
 import Hack2.Contrib.Middleware.NotFound
@@ -21,6 +20,7 @@ import qualified Data.ByteString.Lazy.Char8 as B
 import qualified Prelude as P
 import Air.Data.Record.SimpleLabel hiding (get)
 import Data.Maybe
+import qualified Data.Default as Default
 
 
 
@@ -60,7 +60,7 @@ miku_router route_method route_string app_monad app = \env ->
   where
     
     run_app_monad :: AppMonad -> Application
-    run_app_monad app_monad = \env -> runReaderT app_monad env .flip execStateT def {status = 200}
+    run_app_monad app_monad = \env -> runReaderT app_monad env .flip execStateT Default.def
     
 
 parse_params :: ByteString -> ByteString -> Maybe (ByteString, [(ByteString, ByteString)])

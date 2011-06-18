@@ -49,9 +49,6 @@ mime k v = modM __mimes - insert_last (k,v)
 public :: Maybe ByteString -> [ByteString] -> MikuMonad
 public r xs = middleware - static r xs
 
-io :: (MonadIO m) => IO a -> m a
-io = liftIO
-
 text :: ByteString -> AppMonad
 text x = do
   update - set_content_type _TextPlain

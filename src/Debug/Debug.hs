@@ -5,7 +5,7 @@ import Hack2
 import Prelude hiding ((.), (>), (/), (^), (-))
 import Air.Light
 import Hack2.Contrib.Response
-import Data.Default
+import Air.Data.Default
 
 app :: Application
 app = \env -> do
