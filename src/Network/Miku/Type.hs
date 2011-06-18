@@ -24,15 +24,7 @@ data MikuState = MikuState
   , mimes           :: [(ByteString, ByteString)]
   }
 
-
-instance Default MikuState where
-  def = MikuState 
-    {
-      middlewares = def
-    , router = def
-    , mimes = def
-    }
-
+mkDefault ''MikuState
 mkLabel ''MikuState
 
 type MikuMonadT a = State MikuState a
