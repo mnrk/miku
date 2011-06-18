@@ -52,12 +52,12 @@ public r xs = middleware - static r xs
 text :: ByteString -> AppMonad
 text x = do
   update - set_content_type _TextPlain
-  update - set_body x
+  update - set_body_bytestring x
 
 html :: ByteString -> AppMonad
 html x = do
   update - set_content_type _TextHtml
-  update - set_body x
+  update - set_body_bytestring x
 
 
 captures :: AppMonadT [(ByteString, ByteString)]
