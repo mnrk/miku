@@ -50,15 +50,15 @@ mime k v = modM __mimes - insert_last (k,v)
 public :: Maybe ByteString -> [ByteString] -> MikuMonad
 public r xs = middleware - static r xs
 
-text :: Lazy.ByteString -> AppMonad
+text :: ByteString -> AppMonad
 text x = do
   update - set_content_type _TextPlain
-  update - set_body_bytestring x
+  update - set_body_bytestring - Lazy.fromChunks [x]
 
-html :: Lazy.ByteString -> AppMonad
+html :: ByteString -> AppMonad
 html x = do
   update - set_content_type _TextHtml
-  update - set_body_bytestring x
+  update - set_body_bytestring - Lazy.fromChunks [x]
 
 
 captures :: AppMonadT [(ByteString, ByteString)]

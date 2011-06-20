@@ -38,19 +38,19 @@ main = do
 
     get "/bench" - do
       name <- ask ^ params ^ lookup "name" ^ fromMaybe "nobody"
-      html ("<h1>" + s2l name + "</h1>")
+      html ("<h1>" + name + "</h1>")
 
     -- simple
     get "/hello"    (text "hello world")
   
-    get "/debug"    (text . Lazy.pack . show =<< ask)
+    get "/debug"    (text . show_bytestring =<< ask)
   
     -- io
-    get "/cabal"    - text =<< io (Lazy.readFile "miku.cabal")
+    get "/cabal"    - text =<< io (B.readFile "miku.cabal")
 
     -- route captures
     get "/say/:user/:message" - do
-      text . Lazy.pack . show =<< captures
+      text . show_bytestring =<< captures
 
     -- html output
     get "/html"     (html "<html><body><p>miku power!</p></body></html>")
@@ -60,7 +60,7 @@ main = do
     -- default
     get "/" - do
       io . print =<< ask ^ url
-      text . Lazy.pack . show =<< ask
+      text . show_bytestring =<< ask
 
     -- public serve, only allows /src
     public (Just ".") ["/src"]
