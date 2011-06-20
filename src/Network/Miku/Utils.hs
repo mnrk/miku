@@ -8,8 +8,8 @@ import Air.Env
 import Prelude ()
 import Data.ByteString.UTF8 (fromString, toString)
 
-import qualified Data.ByteString.Lazy.Char8 as B
-import Data.ByteString.Lazy.Char8 (ByteString)
+import qualified Data.ByteString.Char8 as B
+import Data.ByteString.Char8 (ByteString)
 
 namespace :: ByteString -> Env -> [(ByteString, ByteString)]
 namespace x env =

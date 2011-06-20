@@ -15,8 +15,8 @@ import Network.Miku.Config
 import Network.Miku.Type
 import Network.Miku.Utils
 import Prelude ()
-import Data.ByteString.Lazy.Char8 (ByteString)
-import qualified Data.ByteString.Lazy.Char8 as B
+import Data.ByteString.Char8 (ByteString)
+import qualified Data.ByteString.Char8 as B
 import qualified Prelude as P
 import Air.Data.Record.SimpleLabel hiding (get)
 import Data.Maybe

@@ -7,7 +7,7 @@ import Control.Monad.State
 import Air.Data.Default
 import Hack2
 import Hack2.Contrib.Utils
-import Data.ByteString.Lazy.Char8 (ByteString)
+import Data.ByteString.Char8 (ByteString)
 
 import Air.TH
 

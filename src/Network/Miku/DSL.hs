@@ -16,7 +16,8 @@ import Network.Miku.Type
 import Network.Miku.Utils
 import Prelude hiding ((.), (>), (^), (-))
 import qualified Control.Monad.State as State
-import Data.ByteString.Lazy.Char8 (ByteString)
+import Data.ByteString.Char8 (ByteString)
+import qualified Data.ByteString.Lazy.Char8 as Lazy
 
 import Air.Data.Record.SimpleLabel hiding (get)
 
@@ -49,12 +50,12 @@ mime k v = modM __mimes - insert_last (k,v)
 public :: Maybe ByteString -> [ByteString] -> MikuMonad
 public r xs = middleware - static r xs
 
-text :: ByteString -> AppMonad
+text :: Lazy.ByteString -> AppMonad
 text x = do
   update - set_content_type _TextPlain
   update - set_body_bytestring x
 
-html :: ByteString -> AppMonad
+html :: Lazy.ByteString -> AppMonad
 html x = do
   update - set_content_type _TextHtml
   update - set_body_bytestring x

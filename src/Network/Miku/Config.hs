@@ -9,7 +9,7 @@ import Hack2.Contrib.Middleware.ContentLength
 import Hack2.Contrib.Middleware.ContentType
 import Network.Miku.Utils
 import Prelude hiding ((.), (>), (^), (-))
-import Data.ByteString.Lazy.Char8 (ByteString)
+import Data.ByteString.Char8 (ByteString)
 
 
 pre_installed_middlewares :: [Middleware]

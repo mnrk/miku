@@ -1,6 +1,6 @@
 -- import Network.Miku hiding (app)
 import Hack2.Handler.Happstack
-import Data.ByteString.Lazy.Char8 
+import Data.ByteString.Char8 
 import Hack2
 import Prelude hiding ((.), (>), (/), (^), (-))
 import Air.Light
