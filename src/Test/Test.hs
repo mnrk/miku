@@ -57,14 +57,14 @@ main = do
 
 
   
-    -- default
+
     get "/" - do
-      io . print =<< ask ^ url
       text "match /"
     
     get "/test-star/*/hi" - do
       text "test-star/*/hi"
     
+    -- default
     get "*" - do
       text "match everything"
 
