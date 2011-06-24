@@ -67,13 +67,18 @@ parse_params :: ByteString -> ByteString -> Maybe (ByteString, [(ByteString, Byt
 parse_params "" ""  = Just ("", [])
 parse_params "" _   = Nothing
 parse_params "/" "" = Nothing
-parse_params "/" _  = Just ("/", [])
+parse_params "/" "/"  = Just ("/", [])
 
 parse_params t s = 
+  
   let template_tokens = t.B.split '/'
       url_tokens      = s.B.split '/'
+  
+      _template_last_token_matches_everything         = template_tokens.length P.> 0 && template_tokens.last.is "*"
+      _template_tokens_length_equals_url_token_length = template_tokens.length == url_tokens.length
   in
-  if url_tokens.length P.< template_tokens.length
+  
+  if not - _template_last_token_matches_everything || _template_tokens_length_equals_url_token_length
     then Nothing
     else 
       let rs = zipWith capture template_tokens url_tokens
@@ -89,5 +94,6 @@ parse_params t s =
   where
     capture x y 
       | x.B.unpack.starts_with ":" = Just - Just (x.B.tail, y)
+      | x.is "*" = Just Nothing
       | x == y = Just Nothing
       | otherwise = Nothing

@@ -4,7 +4,7 @@
 import Control.Monad.Reader
 import Hack2.Contrib.Response
 -- import Hack2.Handler.SimpleServer
-import Hack2.Handler.HappstackServer
+import Hack2.Handler.Warp
 import Hack2.Contrib.Utils (show_bytestring, s2l, l2s)
 
 import Network.Miku
@@ -60,7 +60,13 @@ main = do
     -- default
     get "/" - do
       io . print =<< ask ^ url
-      text . show_bytestring =<< ask
+      text "match /"
+    
+    get "/test-star/*/hi" - do
+      text "test-star/*/hi"
+    
+    get "*" - do
+      text "match everything"
 
     -- public serve, only allows /src
     public (Just ".") ["/src"]
