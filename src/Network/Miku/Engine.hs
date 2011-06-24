@@ -64,6 +64,7 @@ miku_router route_method route_string app_monad app = \env ->
     
 
 parse_params :: ByteString -> ByteString -> Maybe (ByteString, [(ByteString, ByteString)])
+parse_params "*" x = Just (x, [])
 parse_params "" ""  = Just ("", [])
 parse_params "" _   = Nothing
 parse_params "/" "" = Nothing
