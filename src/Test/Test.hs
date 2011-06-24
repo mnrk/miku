@@ -1,10 +1,8 @@
-{-# LANGUAGE PackageImports #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 import Control.Monad.Reader
 import Hack2.Contrib.Response
--- import Hack2.Handler.SimpleServer
-import Hack2.Handler.Warp
+import Hack2.Handler.HappstackServer
 import Hack2.Contrib.Utils (show_bytestring, s2l, l2s)
 
 import Network.Miku
@@ -19,7 +17,6 @@ import qualified Data.ByteString.Char8 as B
 import qualified Data.ByteString.Lazy.Char8 as Lazy
 
 import Hack2.Contrib.Middleware.SimpleAccessLogger
-
 
 
 -- default on port 3000
