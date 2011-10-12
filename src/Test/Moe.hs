@@ -3,7 +3,7 @@
 
 import qualified Network.Miku as Miku
 import Network.Miku (get, miku)
-import Hack2.Handler.HappstackServer
+import Hack2.Handler.SnapServer
 import Text.HTML.Moe2
 
 import Prelude hiding ((/), (-), head, (>), div)

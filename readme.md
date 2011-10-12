@@ -7,7 +7,7 @@ A tiny web dev DSL
     {-# LANGUAGE OverloadedStrings #-}
     
     import Network.Miku
-    import Hack2.Handler.HappstackServer
+    import Hack2.Handler.SnapServer
     
     main = run . miku $ get "/" (text "miku power")
 
@@ -16,7 +16,7 @@ A tiny web dev DSL
 
     cabal update
     cabal install miku
-    cabal install hack2-handler-happstack-server
+    cabal install hack2-handler-snap-server
     
     -- copy and paste the above example to myapp.hs
     
@@ -40,7 +40,7 @@ check: <http://localhost:3000>
     import Prelude hiding ((-))
     
     import Network.Miku
-    import Hack2.Handler.HappstackServer
+    import Hack2.Handler.SnapServer
     
     main = run . miku - do
 

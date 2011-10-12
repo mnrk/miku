@@ -2,8 +2,8 @@
 
 import Control.Monad.Reader
 import Hack2.Contrib.Response
-import Hack2.Handler.HappstackServer
-import Hack2.Contrib.Utils (show_bytestring, s2l, l2s)
+import Hack2.Handler.SnapServer
+import Hack2.Contrib.Utils (show_bytestring)
 
 import Network.Miku
 import Network.Miku.Engine
