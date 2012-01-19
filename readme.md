@@ -113,8 +113,3 @@ check: <http://localhost:3000>
 * miku is inspired by [Rack](http://rack.rubyforge.org), [Rails](http://rubyonrails.org), [Ramaze](http://ramaze.net), [Happstack](http://happstack.com/) and [Sinatra](http://www.sinatrarb.com/).
 
 
-<br/>
-
-<p>
-<a href="http://en.wikipedia.org/wiki/Hatsune_Miku"><img src="https://github.com/nfjinjing/miku/raw/master/ita.jpg"/></a>
-</p>
