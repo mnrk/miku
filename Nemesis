@@ -27,6 +27,7 @@ nemesis = do
   task "i" - do
     sh "ghci -isrc src/Test/Test.hs"
   
+  desc "run the test app in src/Test/Test.hs"
   task "run" - do
     sh "runghc -isrc src/Test/Test.hs"
     
