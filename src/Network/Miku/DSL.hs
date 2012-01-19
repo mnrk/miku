@@ -17,7 +17,6 @@ import Network.Miku.Utils
 import Prelude hiding ((.), (>), (^), (-))
 import qualified Control.Monad.State as State
 import Data.ByteString.Char8 (ByteString)
-import qualified Data.ByteString.Lazy.Char8 as Lazy
 
 import Air.Data.Record.SimpleLabel hiding (get)
 
