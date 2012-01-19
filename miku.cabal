@@ -1,5 +1,5 @@
 Name:                 miku
-Version:              2011.6.24
+Version:              2012.1.19
 Build-type:           Simple
 Synopsis:             A minimum web dev DSL in Haskell
 Description:
@@ -17,10 +17,10 @@ homepage:             https://github.com/nfjinjing/miku
 data-files:           readme.md, changelog.md, Nemesis, known-issues.md
 
 library
-  build-depends:      base > 4 && <= 5
+  build-depends:      base > 4 && <= 99
                     , data-default
-                    , hack2 >= 2011.6.20
-                    , hack2-contrib >= 2011.6.20
+                    , hack2 >= 2012.1.19
+                    , hack2-contrib >= 2012.1.19
                     , utf8-string
                     , air >= 2011.6.19
                     , mtl
