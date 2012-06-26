@@ -100,7 +100,9 @@ check: <http://localhost:3000>
     miku :: MikuMonad -> Application
 
 
-## Miku application template that shows how to incorporate auto reload and other cool stuff
+## Miku application template
+
+This template project shows how to incorporate sandboxing, auto-reloading and other cool stuff.
 
 <https://github.com/nfjinjing/miku-template>
 
