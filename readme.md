@@ -100,6 +100,12 @@ check: <http://localhost:3000>
     miku :: MikuMonad -> Application
 
 
+## Miku application template that shows how to incorporate auto reload and other cool stuff
+
+<https://github.com/nfjinjing/miku-template>
+
+  
+
 ## Hints
 
 * It's recommended to use your own html combinator / template engine. Try DIY with, e.g. [moe](http://github.com/nfjinjing/moe).
